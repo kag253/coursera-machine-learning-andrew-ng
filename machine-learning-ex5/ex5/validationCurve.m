@@ -39,6 +39,21 @@ error_val = zeros(length(lambda_vec), 1);
 %
 %
 
+for i = 1:length(lambda_vec)
+    lambda = lambda_vec(i);
+    
+    % Calculating the training error for the ith lambda
+    theta = trainLinearReg(X, y, lambda);
+    [training_error, training_grad] = linearRegCostFunction(X, y, theta, 0);
+    
+    % Calculating the cross validation error for the ith lambda
+    [cv_error, cv_grad] = linearRegCostFunction(Xval, yval, theta, 0);
+    
+    error_train(i) = training_error;
+    error_val(i) = cv_error;
+ 
+end
+
 
 
 
